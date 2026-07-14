@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glowora Beauty Academy — Learn Beauty. Build Confidence. Start Your Career.</title>
+<meta name="description" content="Glowora Beauty Academy — premium online beauty education. Makeup, skincare, bridal, hair styling and beauty business courses with live classes and certification.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#D4A373;
+    --gold-deep:#B9814F;
+    --beige:#F8EDE3;
+    --rose:#E8A0BF;
+    --bg:#FFFDFB;
+    --ink:#2D2D2D;
+    --ink-soft:#6b6560;
+    --espresso:#3A2E27;
+    --line: rgba(58,46,39,0.14);
+    --ring: conic-gradient(from 210deg, var(--gold), var(--rose), var(--gold-deep), var(--gold));
+    --radius: 18px;
+    --shadow: 0 20px 50px -25px rgba(58,46,39,0.35);
+  }
+  html[data-theme="dark"]{
+    --bg:#211a16;
+    --ink:#F3EAE2;
+    --ink-soft:#c9bbae;
+    --beige:#2c231d;
+    --line: rgba(248,237,227,0.12);
+    --shadow: 0 20px 50px -20px rgba(0,0,0,0.6);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Poppins', sans-serif;
+    font-weight:300;
+    transition: background .4s ease, color .4s ease;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Playfair Display', serif;
+    margin:0;
+    color:var(--ink);
+    font-weight:600;
+    letter-spacing:.2px;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .eyebrow{
+    font-family:'Montserrat', sans-serif;
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--gold-deep);
+    font-weight:700;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px; height:1px;
+    background:var(--gold);
+  }
+  .container{
+    max-width:1240px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+  section{ padding:110px 0; position:relative; }
+  .btn{
+    font-family:'Montserrat', sans-serif;
+    font-weight:600;
+    font-size:13.5px;
+    letter-spacing:.5px;
+    padding:16px 32px;
+    border-radius:100px;
+    border:1px solid transparent;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    transition: all .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .btn-primary{
+    background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+    color:#fff;
+    box-shadow: 0 14px 30px -12px rgba(212,163,115,0.65);
+  }
+  .btn-primary:hover{ transform: translateY(-3px); box-shadow: 0 20px 38px -12px rgba(212,163,115,0.8); }
+  .btn-ghost{
+    background:transparent;
+    border-color: var(--line);
+    color:var(--ink);
+  }
+  .btn-ghost:hover{ border-color: var(--gold); color:var(--gold-deep); }
+  .btn-sm{ padding:10px 20px; font-size:12px; }
+
+  /* HEADER */
+  header{
+    position:sticky; top:0; z-index:1000;
+    background: color-mix(in srgb, var(--bg) 86%, transparent);
+    backdrop-filter: blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0;
+  }
+  .logo{ display:flex; align-items:center; gap:10px; }
+  .logo-mark{
+    width:38px; height:38px; border-radius:50%;
+    background:var(--ring);
+    position:relative;
+  }
+  .logo-mark::after{
+    content:"";
+    position:absolute; inset:5px;
+    background:var(--bg); border-radius:50%;
+  }
+  .logo-text{ font-family:'Playfair Display', serif; font-size:20px; font-weight:700; }
+  .logo-text span{ color:var(--gold-deep); font-style:italic; }
+  nav.links{ display:flex; gap:34px; font-size:14px; font-weight:400;}
+  nav.links a{ position:relative; padding-bottom:4px; color:var(--ink-soft); transition:color .25s; }
+  nav.links a:hover{ color:var(--ink); }
+  nav.links a::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:var(--gold); transition:width .3s ease;
+  }
+  nav.links a:hover::after{ width:100%; }
+  .nav-actions{ display:flex; align-items:center; gap:14px; }
+  .theme-toggle{
+    width:38px; height:38px; border-radius:50%; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    background:transparent; color:var(--ink); font-size:16px;
+  }
+  .burger{ display:none; background:none; border:none; font-size:22px; color:var(--ink); cursor:pointer; }
+
+  /* HERO */
+  .hero{
+    padding:90px 0 60px;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns: 1.05fr .95fr; gap:60px; align-items:center;
+  }
+  .hero h1{
+    font-size:52px; line-height:1.12; margin-bottom:22px;
+  }
+  .hero h1 em{ font-style:italic; color:var(--gold-deep); }
+  .hero p.lead{
+    font-size:17px; color:var(--ink-soft); line-height:1.8; max-width:480px; margin-bottom:36px;
+  }
+  .hero-actions{ display:flex; gap:16px; margin-bottom:46px; flex-wrap:wrap;}
+  .hero-stats{ display:flex; gap:40px; }
+  .hero-stats div b{ font-family:'Playfair Display',serif; font-size:26px; display:block; }
+  .hero-stats div span{ font-size:12.5px; color:var(--ink-soft); }
+
+  .hero-visual{ position:relative; height:520px; }
+  .ring-glow{
+    position:absolute; width:420px; height:420px; border-radius:50%;
+    background:var(--ring);
+    top:20px; left:50%; transform:translateX(-50%);
+    filter: blur(0px);
+    opacity:.9;
+    animation: spin 18s linear infinite;
+  }
+  @keyframes spin{ to{ transform:translateX(-50%) rotate(360deg);} }
+  .studio-card{
+    position:absolute; top:50px; left:50%; transform:translateX(-50%);
+    width:340px; height:420px; border-radius:28px;
+    background: linear-gradient(160deg, var(--beige), var(--bg));
+    border:1px solid var(--line);
+    box-shadow: var(--shadow);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px;
+    overflow:hidden;
+  }
+  .studio-card .palette{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:10px;
+  }
+  .palette span{
+    width:34px; height:34px; border-radius:50%;
+    box-shadow: inset 0 -4px 8px rgba(0,0,0,0.15);
+  }
+  .palette span:nth-child(1){ background:#D4A373; }
+  .palette span:nth-child(2){ background:#E8A0BF; }
+  .palette span:nth-child(3){ background:#C97B63; }
+  .palette span:nth-child(4){ background:#8C5E4A; }
+  .palette span:nth-child(5){ background:#F3D9C4; }
+  .palette span:nth-child(6){ background:#B9814F; }
+  .palette span:nth-child(7){ background:#F1B6CE; }
+  .palette span:nth-child(8){ background:#7A4B39; }
+  .studio-card .brushline{ width:70%; height:1px; background:var(--line); }
+  .studio-card .cap{ font-family:'Playfair Display', serif; font-style:italic; color:var(--gold-deep); font-size:15px; }
+
+  .float-card{
+    position:absolute; background:var(--bg); border:1px solid var(--line);
+    border-radius:14px; padding:14px 16px; box-shadow: var(--shadow);
+    display:flex; align-items:center; gap:10px; font-size:12.5px; font-weight:500;
+    animation: float 5s ease-in-out infinite;
+  }
+  .float-card .dot{ width:8px; height:8px; border-radius:50%; background:var(--rose); }
+  .fc1{ top:10px; right:0; animation-delay:.2s; max-width:190px; line-height:1.4; }
+  .fc2{ bottom:40px; left:-10px; animation-delay:1s; }
+  .fc3{ bottom:110px; right:-20px; animation-delay:1.8s; }
+  @keyframes float{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-12px);} }
+
+  /* SECTION HEAD */
+  .section-head{ max-width:640px; margin-bottom:60px; }
+  .section-head.center{ margin-left:auto; margin-right:auto; text-align:center; }
+  .section-head h2{ font-size:36px; line-height:1.25; }
+  .section-head p{ color:var(--ink-soft); margin-top:14px; font-size:15px; line-height:1.8; }
+
+  /* COURSES */
+  .course-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:28px;
+  }
+  .course-card{
+    border:1px solid var(--line); border-radius:var(--radius);
+    overflow:hidden; background:var(--bg);
+    transition: transform .35s ease, box-shadow .35s ease;
+  }
+  .course-card:hover{ transform:translateY(-8px); box-shadow: var(--shadow); }
+  .course-thumb{
+    height:170px; position:relative;
+    display:flex; align-items:center; justify-content:center;
+    background: linear-gradient(135deg, var(--beige), var(--rose) 130%);
+  }
+  .course-thumb svg{ width:56px; height:56px; opacity:.85; }
+  .level-badge{
+    position:absolute; top:14px; left:14px;
+    background:rgba(255,255,255,0.85); color:var(--espresso);
+    font-family:'Montserrat',sans-serif; font-size:10.5px; font-weight:700;
+    letter-spacing:.5px; text-transform:uppercase;
+    padding:5px 12px; border-radius:100px;
+  }
+  .course-body{ padding:24px; }
+  .course-body h3{ font-size:19px; margin-bottom:8px; }
+  .course-body p{ font-size:13.5px; color:var(--ink-soft); line-height:1.7; margin-bottom:16px; min-height:66px; }
+  .course-meta{
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:12px; color:var(--ink-soft); border-top:1px solid var(--line);
+    padding-top:14px; margin-bottom:18px;
+  }
+  .stars{ color:var(--gold-deep); font-size:12px; }
+  .course-foot{ display:flex; justify-content:space-between; align-items:center; }
+  .course-foot .instructor{ font-size:12.5px; color:var(--ink-soft); }
+
+  /* WHY CHOOSE */
+  .why-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:26px;
+  }
+  .why-card{
+    border:1px solid var(--line); border-radius:16px; padding:30px 24px;
+    background:var(--beige);
+    transition: transform .3s ease;
+  }
+  .why-card:hover{ transform:translateY(-6px); }
+  .why-card .icon{
+    width:46px; height:46px; border-radius:50%; background:var(--ring);
+    display:flex; align-items:center; justify-content:center; margin-bottom:18px;
+    color:#fff; font-size:18px;
+  }
+  .why-card h4{ font-size:16px; margin-bottom:8px; }
+  .why-card p{ font-size:13px; color:var(--ink-soft); line-height:1.6; margin:0; }
+
+  /* PROCESS */
+  .process{ position:relative; }
+  .process-line{
+    display:grid; grid-template-columns:repeat(5,1fr);
+    position:relative;
+  }
+  .process-line::before{
+    content:""; position:absolute; top:28px; left:10%; right:10%; height:1px;
+    background: repeating-linear-gradient(to right, var(--gold) 0 8px, transparent 8px 16px);
+  }
+  .step{ text-align:center; padding:0 14px; position:relative; z-index:2; }
+  .step-num{
+    width:56px; height:56px; border-radius:50%; margin:0 auto 20px;
+    background:var(--bg); border:1.5px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Playfair Display', serif; font-weight:700; color:var(--gold-deep); font-size:18px;
+  }
+  .step h4{ font-size:15px; margin-bottom:8px; }
+  .step p{ font-size:12.5px; color:var(--ink-soft); line-height:1.6; }
+
+  /* TUTORIALS */
+  .tut-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .tut-card{ border-radius:16px; overflow:hidden; border:1px solid var(--line); }
+  .tut-thumb{
+    height:150px; background:linear-gradient(150deg, var(--gold) 0%, var(--rose) 100%);
+    position:relative; display:flex; align-items:center; justify-content:center;
+  }
+  .play-btn{
+    width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.9);
+    display:flex; align-items:center; justify-content:center; color:var(--gold-deep); font-size:14px;
+  }
+  .tut-duration{
+    position:absolute; bottom:10px; right:10px; background:rgba(0,0,0,0.55); color:#fff;
+    font-size:10.5px; padding:3px 9px; border-radius:6px;
+  }
+  .tut-body{ padding:16px 18px; }
+  .tut-body h4{ font-size:14.5px; font-weight:500; font-family:'Poppins',sans-serif; }
+
+  /* TESTIMONIALS */
+  .test-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .test-card{
+    background:var(--beige); border-radius:18px; padding:30px 26px;
+    border:1px solid var(--line);
+  }
+  .test-top{ display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+  .avatar{
+    width:48px; height:48px; border-radius:50%; background:var(--ring);
+    display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Playfair Display',serif; font-weight:700;
+  }
+  .test-name{ font-size:14.5px; font-weight:600; }
+  .test-course{ font-size:11.5px; color:var(--ink-soft); }
+  .test-card p.quote{ font-size:13.5px; line-height:1.75; color:var(--ink-soft); font-style:italic; margin-bottom:14px; }
+
+  /* INSTRUCTOR */
+  .instructor-wrap{
+    display:grid; grid-template-columns: .85fr 1.15fr; gap:60px; align-items:center;
+  }
+  .instructor-photo{
+    height:420px; border-radius:24px;
+    background: linear-gradient(150deg, var(--beige), var(--rose));
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .instructor-photo .initials{
+    width:130px; height:130px; border-radius:50%; background:var(--ring);
+    display:flex; align-items:center; justify-content:center; color:#fff;
+    font-family:'Playfair Display',serif; font-size:44px; font-weight:700;
+  }
+  .instructor-info .cred{
+    display:flex; gap:28px; margin:24px 0; flex-wrap:wrap;
+  }
+  .instructor-info .cred div b{ display:block; font-family:'Playfair Display',serif; font-size:22px; }
+  .instructor-info .cred div span{ font-size:12px; color:var(--ink-soft); }
+  .instructor-info p{ color:var(--ink-soft); font-size:14.5px; line-height:1.85; }
+
+  /* CERTIFICATE */
+  .cert-wrap{
+    display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;
+  }
+  .cert-card{
+    border-radius:20px; border:1.5px solid var(--gold);
+    padding:44px; background: linear-gradient(160deg, var(--beige), var(--bg));
+    position:relative;
+  }
+  .cert-card::before{
+    content:""; position:absolute; inset:10px; border:1px dashed var(--gold);
+    border-radius:12px;
+  }
+  .cert-seal{
+    width:70px; height:70px; border-radius:50%; background:var(--ring); margin:0 auto 18px;
+    display:flex; align-items:center; justify-content:center; color:#fff; font-size:22px;
+  }
+  .cert-card h4{ text-align:center; font-size:20px; margin-bottom:6px; }
+  .cert-card p{ text-align:center; font-size:12.5px; color:var(--ink-soft); }
+  .cert-card .name-line{ text-align:center; margin:26px 0 8px; font-family:'Playfair Display', serif; font-style:italic; font-size:20px; color:var(--gold-deep); border-bottom:1px solid var(--line); padding-bottom:10px; }
+
+  /* BLOG */
+  .blog-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .blog-card{ border:1px solid var(--line); border-radius:16px; padding:26px; transition:transform .3s ease; }
+  .blog-card:hover{ transform:translateY(-6px); }
+  .blog-tag{ font-size:11px; color:var(--gold-deep); font-weight:600; font-family:'Montserrat',sans-serif; letter-spacing:.5px; text-transform:uppercase;}
+  .blog-card h4{ font-size:16.5px; margin:12px 0 10px; line-height:1.4; }
+  .blog-card .read{ font-size:12.5px; color:var(--ink-soft); }
+
+  /* FAQ */
+  .faq-list{ max-width:780px; margin:0 auto; }
+  .faq-item{ border-bottom:1px solid var(--line); }
+  .faq-q{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px 4px; cursor:pointer; font-size:15.5px; font-weight:500;
+  }
+  .faq-q .plus{ transition: transform .3s ease; color:var(--gold-deep); font-size:20px; }
+  .faq-item.open .plus{ transform: rotate(45deg); }
+  .faq-a{ max-height:0; overflow:hidden; transition: max-height .35s ease; font-size:13.5px; color:var(--ink-soft); line-height:1.8; }
+  .faq-item.open .faq-a{ max-height:200px; padding-bottom:20px; }
+
+  /* CONTACT */
+  .contact-wrap{ display:grid; grid-template-columns: 1fr 1fr; gap:60px; }
+  .form-field{ margin-bottom:18px; }
+  .form-field label{ font-size:12.5px; color:var(--ink-soft); display:block; margin-bottom:8px; }
+  .form-field input, .form-field textarea{
+    width:100%; padding:14px 16px; border-radius:10px; border:1px solid var(--line);
+    background:var(--bg); color:var(--ink); font-family:'Poppins',sans-serif; font-size:14px;
+  }
+  .form-field textarea{ resize:vertical; min-height:110px; }
+  .contact-info-card{
+    border-radius:18px; border:1px solid var(--line); padding:34px; background:var(--beige);
+  }
+  .contact-row{ display:flex; gap:14px; align-items:flex-start; margin-bottom:22px; }
+  .contact-row .ic{
+    width:38px; height:38px; border-radius:50%; background:var(--ring); flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; color:#fff; font-size:14px;
+  }
+  .contact-row b{ display:block; font-size:14px; margin-bottom:3px; }
+  .contact-row span{ font-size:13px; color:var(--ink-soft); }
+  .map-box{
+    height:150px; border-radius:12px; margin-top:10px;
+    background: repeating-linear-gradient(45deg, var(--line) 0 2px, transparent 2px 14px), var(--bg);
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--ink-soft);
+  }
+
+  /* CTA BAND */
+  .cta-band{
+    background: linear-gradient(120deg, var(--gold-deep), var(--gold) 60%, var(--rose));
+    border-radius:28px; padding:64px; text-align:center; color:#fff; margin:0 32px;
+  }
+  .cta-band h2{ color:#fff; font-size:32px; margin-bottom:16px; }
+  .cta-band p{ opacity:.92; margin-bottom:30px; font-size:14.5px; }
+  .cta-band .btn-primary{ background:#fff; color:var(--gold-deep); box-shadow:none; }
+  .cta-band .btn-ghost{ border-color: rgba(255,255,255,0.5); color:#fff; }
+
+  /* FOOTER */
+  footer{ background:var(--espresso); color:#EFE6DD; padding:80px 0 30px; margin-top:60px; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr 1.2fr; gap:40px; margin-bottom:60px; }
+  .footer-grid h5{ font-family:'Montserrat',sans-serif; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:#C9A876; margin-bottom:20px; }
+  .footer-grid ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px; font-size:13.5px; color:#cfc3b7; }
+  .footer-grid ul a:hover{ color:#fff; }
+  .footer-brand p{ font-size:13px; color:#cfc3b7; line-height:1.8; margin-top:14px; max-width:280px; }
+  .socials{ display:flex; gap:10px; margin-top:20px; }
+  .socials a{
+    width:34px; height:34px; border-radius:50%; border:1px solid rgba(255,255,255,0.2);
+    display:flex; align-items:center; justify-content:center; font-size:13px;
+  }
+  .newsletter input{
+    width:100%; padding:12px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.2);
+    background:rgba(255,255,255,0.06); color:#fff; font-size:13px; margin-bottom:10px;
+  }
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.12); padding-top:24px;
+    display:flex; justify-content:space-between; font-size:12px; color:#a99a8c; flex-wrap:wrap; gap:10px;
+  }
+
+  @media (max-width: 980px){
+    .hero-grid, .instructor-wrap, .cert-wrap, .contact-wrap{ grid-template-columns:1fr; }
+    .hero-visual{ height:420px; margin-top:20px; }
+    .course-grid, .why-grid, .tut-grid, .test-grid, .blog-grid{ grid-template-columns:repeat(2,1fr); }
+    .process-line{ grid-template-columns:repeat(1,1fr); row-gap:34px; }
+    .process-line::before{ display:none; }
+    .footer-grid{ grid-template-columns:repeat(2,1fr); }
+    nav.links{ display:none; }
+    .burger{ display:block; }
+  }
+  @media (max-width:600px){
+    section{ padding:70px 0; }
+    .hero h1{ font-size:36px; }
+    .course-grid, .why-grid, .tut-grid, .test-grid, .blog-grid{ grid-template-columns:1fr; }
+    .cta-band{ margin:0 16px; padding:44px 24px; }
+    .footer-grid{ grid-template-columns:1fr; }
+    .container{ padding:0 20px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration: 0.001ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav-wrap">
+    <div class="logo">
+      <div class="logo-mark"></div>
+      <div class="logo-text">Glowora <span>Beauty Academy</span></div>
+    </div>
+    <nav class="links">
+      <a href="#home">Home</a>
+      <a href="#courses">Courses</a>
+      <a href="#tutorials">Tutorials</a>
+      <a href="#live">Live Classes</a>
+      <a href="#blog">Beauty Blog</a>
+      <a href="#stories">Success Stories</a>
+      <a href="#instructor">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">◐</button>
+      <a href="#contact" class="btn btn-ghost btn-sm">Login</a>
+      <a href="#courses" class="btn btn-primary btn-sm">Enroll Now</a>
+      <button class="burger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Online Beauty Education</div>
+      <h1>Master Beauty Skills <em>from</em><br>the Comfort of Your Home</h1>
+      <p class="lead">Learn Beauty Skills Through Easy Video Lessons</p>
+      <div class="hero-actions">
+        <a href="#courses" class="btn btn-primary">Explore Courses</a>
+        <a href="#tutorials" class="btn btn-ghost">▶ Watch Free Class</a>
+      </div>
+      <div class="hero-stats">
+        <div><b>12,400+</b><span>Students Trained</span></div>
+        <div><b>40+</b><span>Expert-Led Courses</span></div>
+        <div><b>4.9 ★</b><span>Average Rating</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="ring-glow"></div>
+      <div class="studio-card">
+        <div class="palette">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="brushline"></div>
+        <div class="cap">Your studio, wherever you are</div>
+      </div>
+      <div class="float-card fc1"><span class="dot"></span> Learn Beauty Skills Through Easy Video Lessons</div>
+      <div class="float-card fc2"><span class="dot"></span> Certificate Unlocked</div>
+      <div class="float-card fc3"><span class="dot"></span> Lesson 4/12 Complete</div>
+    </div>
+  </div>
+</section>
+
+<section id="courses">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Featured Courses</div>
+      <h2>Curriculums built around real beauty careers</h2>
+      <p>Every course pairs HD video lessons with practical assignments so you finish with a portfolio, not just a certificate.</p>
+    </div>
+    <div class="course-grid">
+
+      <div class="course-card">
+        <div class="course-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="level-badge">Beginner</span></div>
+        <div class="course-body">
+          <h3>Beginner Makeup Course</h3>
+          <p>Makeup basics, tools, foundation matching, contouring, blush, and lipstick application.</p>
+          <div class="course-meta"><span>6 weeks</span><span class="stars">★★★★★ 4.8</span></div>
+          <div class="course-foot"><span class="instructor">Priya Malhotra</span><a class="btn btn-ghost btn-sm" href="#contact">Enroll</a></div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 2l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg><span class="level-badge">Advanced</span></div>
+        <div class="course-body">
+          <h3>Professional Makeup Artist Course</h3>
+          <p>Advanced bridal and glam makeup, client handling, and portfolio building for working artists.</p>
+          <div class="course-meta"><span>12 weeks</span><span class="stars">★★★★★ 4.9</span></div>
+          <div class="course-foot"><span class="instructor">Aanya Kapoor</span><a class="btn btn-ghost btn-sm" href="#contact">Enroll</a></div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 3c3 3 5 6 5 9a5 5 0 0 1-10 0c0-3 2-6 5-9z"/></svg><span class="level-badge">Intermediate</span></div>
+        <div class="course-body">
+          <h3>Skincare Expert Course</h3>
+          <p>Skin types, daily routines, acne care, anti-aging, serums, and moisturizers.</p>
+          <div class="course-meta"><span>8 weeks</span><span class="stars">★★★★★ 4.7</span></div>
+          <div class="course-foot"><span class="instructor">Dr. Neha Sharma</span><a class="btn btn-ghost btn-sm" href="#contact">Enroll</a></div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 21s-7-5.5-9.5-9.5C1 8 3 4 7 4c2 0 4 1.5 5 3 1-1.5 3-3 5-3 4 0 6 4 4.5 7.5C19 15.5 12 21 12 21z"/></svg><span class="level-badge">Advanced</span></div>
+        <div class="course-body">
+          <p style="min-height:auto; margin:0;"></p>
+          <h3>Bridal Makeup Course</h3>
+          <p>Complete bridal looks for engagement, mehendi, wedding day, and reception occasions.</p>
+          <div class="course-meta"><span>10 weeks</span><span class="stars">★★★★★ 4.9</span></div>
+          <div class="course-foot"><span class="instructor">Aanya Kapoor</span><a class="btn btn-ghost btn-sm" href="#contact">Enroll</a></div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M4 6c4 0 4 4 8 4s4-4 8-4M4 12c4 0 4 4 8 4s4-4 8-4"/></svg><span class="level-badge">Beginner</span></div>
+        <div class="course-body">
+          <h3>Hair Styling Course</h3>
+          <p>Professional hair styling, curls, braids, buns, and in-salon techniques.</p>
+          <div class="course-meta"><span>7 weeks</span><span class="stars">★★★★☆ 4.6</span></div>
+          <div class="course-foot"><span class="instructor">Ritika Sen</span><a class="btn btn-ghost btn-sm" href="#contact">Enroll</a></div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg><span class="level-badge">Intermediate</span></div>
+        <div class="course-body">
+          <h3>Beauty Business Course</h3>
+          <p>Learn how to start and grow your own beauty salon or online beauty brand.</p>
+          <div class="course-meta"><span>6 weeks</span><span class="stars">★★★★★ 4.8</span></div>
+          <div class="course-foot"><span class="instructor">Priya Malhotra</span><a class="btn btn-ghost btn-sm" href="#contact">Enroll</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--beige);">
+  <div class="container">
+    <div class="section-head center" style="margin-left:auto;margin-right:auto;">
+      <div class="eyebrow">Why Choose Glowora</div>
+      <h2>A learning experience built like a real academy</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card"><div class="icon">✓</div><h4>Expert Beauty Trainers</h4><p>Learn from working makeup artists and licensed skincare professionals.</p></div>
+      <div class="why-card"><div class="icon">▶</div><h4>HD Video Lessons</h4><p>Studio-shot lessons you can pause, rewind, and rewatch anytime.</p></div>
+      <div class="why-card"><div class="icon">●</div><h4>Live Online Classes</h4><p>Weekly live sessions for real-time feedback on your technique.</p></div>
+      <div class="why-card"><div class="icon">↓</div><h4>Downloadable Notes</h4><p>Keep quick-reference guides and product cheat sheets offline.</p></div>
+      <div class="why-card"><div class="icon">✎</div><h4>Practical Assignments</h4><p>Apply every lesson with graded, hands-on practice tasks.</p></div>
+      <div class="why-card"><div class="icon">∞</div><h4>Lifetime Course Access</h4><p>Revisit lessons whenever you need a refresher, at no extra cost.</p></div>
+      <div class="why-card"><div class="icon">🎓</div><h4>Certificate of Completion</h4><p>Earn a shareable, industry-ready credential for every course.</p></div>
+      <div class="why-card"><div class="icon">♥</div><h4>Student Community</h4><p>Get feedback and encouragement from fellow students, always.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head center" style="margin-left:auto;margin-right:auto;">
+      <div class="eyebrow">Learning Process</div>
+      <h2>From first lesson to first client</h2>
+    </div>
+    <div class="process-line">
+      <div class="step"><div class="step-num">1</div><h4>Choose Your Course</h4><p>Pick the path that matches your goals and level.</p></div>
+      <div class="step"><div class="step-num">2</div><h4>Watch Video Lessons</h4><p>Learn at your pace with structured HD lessons.</p></div>
+      <div class="step"><div class="step-num">3</div><h4>Complete Assignments</h4><p>Practice on real techniques with instructor feedback.</p></div>
+      <div class="step"><div class="step-num">4</div><h4>Receive Certificate</h4><p>Graduate with a credential employers recognize.</p></div>
+      <div class="step"><div class="step-num">5</div><h4>Start Your Career</h4><p>Build your portfolio and take on your first clients.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="tutorials" style="background:var(--beige);">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Free Beauty Tutorials</div>
+      <h2>Try Glowora before you enroll</h2>
+    </div>
+    <div class="tut-grid">
+      <div class="tut-card"><div class="tut-thumb"><div class="play-btn">▶</div><span class="tut-duration">8:12</span></div><div class="tut-body"><h4>Natural Everyday Makeup</h4></div></div>
+      <div class="tut-card"><div class="tut-thumb"><div class="play-btn">▶</div><span class="tut-duration">11:40</span></div><div class="tut-body"><h4>Smokey Eye Makeup</h4></div></div>
+      <div class="tut-card"><div class="tut-thumb"><div class="play-btn">▶</div><span class="tut-duration">6:55</span></div><div class="tut-body"><h4>Skincare Routine for Beginners</h4></div></div>
+      <div class="tut-card"><div class="tut-thumb"><div class="play-btn">▶</div><span class="tut-duration">14:20</span></div><div class="tut-body"><h4>Bridal Makeup Tips</h4></div></div>
+      <div class="tut-card"><div class="tut-thumb"><div class="play-btn">▶</div><span class="tut-duration">5:30</span></div><div class="tut-body"><h4>Lipstick Application Guide</h4></div></div>
+      <div class="tut-card"><div class="tut-thumb"><div class="play-btn">▶</div><span class="tut-duration">9:05</span></div><div class="tut-body"><h4>Contouring Basics</h4></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="stories">
+  <div class="container">
+    <div class="section-head center" style="margin-left:auto;margin-right:auto;">
+      <div class="eyebrow">Student Success Stories</div>
+      <h2>Real students, real careers</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="test-top"><div class="avatar">R</div><div><div class="test-name">Rhea Verma</div><div class="test-course">Professional Makeup Artist Course</div></div></div>
+        <p class="quote">"I booked my first bridal client before I even finished the course. The live classes made all the difference."</p>
+        <div class="stars">★★★★★</div>
+      </div>
+      <div class="test-card">
+        <div class="test-top"><div class="avatar">S</div><div><div class="test-name">Simran Kaur</div><div class="test-course">Skincare Expert Course</div></div></div>
+        <p class="quote">"Clear, structured, and genuinely practical. I finally understand my own skin, let alone my clients'."</p>
+        <div class="stars">★★★★★</div>
+      </div>
+      <div class="test-card">
+        <div class="test-top"><div class="avatar">A</div><div><div class="test-name">Ayesha Khan</div><div class="test-course">Beauty Business Course</div></div></div>
+        <p class="quote">"Six months later I've launched my own home studio. The business module alone was worth it."</p>
+        <div class="stars">★★★★★</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="instructor" style="background:var(--beige);">
+  <div class="container instructor-wrap">
+    <div class="instructor-photo"><div class="initials">IS</div></div>
+    <div class="instructor-info">
+      <div class="eyebrow">Meet Your Trainer</div>
+      <h2>Insa Saddique</h2>
+      <div class="cred">
+        <div><b>12+ yrs</b><span>Industry Experience</span></div>
+        <div><b>3,000+</b><span>Students Mentored</span></div>
+        <div><b>Certified</b><span>Bridal &amp; Editorial MUA</span></div>
+      </div>
+      <p>Aanya has spent over a decade working backstage at fashion weeks and building bridal portfolios across the country. She founded Glowora's makeup curriculum to give beginners the same foundations she wished she'd had on day one — practical, honest, and built for real client work.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container cert-wrap">
+    <div>
+      <div class="eyebrow">Certification</div>
+      <h2>Earn an Industry-Ready Certificate</h2>
+      <p style="color:var(--ink-soft); font-size:14.5px; line-height:1.85; margin-top:16px;">Every Glowora course ends with a practical assessment. Pass it, and you'll receive a certificate you can share with employers, clients, or on your portfolio — proof you can do the work, not just watch it.</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-seal">🎓</div>
+      <h4>Certificate of Completion</h4>
+      <p>This certifies that</p>
+      <div class="name-line">Insa Saddique</div>
+      <p>has successfully completed the course</p>
+    </div>
+  </div>
+</section>
+
+<section id="blog" style="background:var(--beige);">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Beauty Blog</div>
+      <h2>Tips, guides, and industry insight</h2>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card"><div class="blog-tag">Makeup</div><h4>Top 10 Makeup Tips Every Beginner Should Know</h4><div class="read">6 min read</div></div>
+      <div class="blog-card"><div class="blog-tag">Skincare</div><h4>The Best Skincare Routine for Every Skin Type</h4><div class="read">8 min read</div></div>
+      <div class="blog-card"><div class="blog-tag">Tools</div><h4>Makeup Kit Essentials for New Artists</h4><div class="read">5 min read</div></div>
+      <div class="blog-card"><div class="blog-tag">Guide</div><h4>Common Beauty Mistakes and How to Fix Them</h4><div class="read">7 min read</div></div>
+      <div class="blog-card"><div class="blog-tag">Business</div><h4>How to Start Your Own Beauty Business</h4><div class="read">10 min read</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head center" style="margin-left:auto;margin-right:auto;">
+      <div class="eyebrow">FAQ</div>
+      <h2>Questions, answered</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q">How do I enroll? <span class="plus">+</span></div><div class="faq-a">Choose a course, click Enroll Now, and complete checkout — you'll get instant access to your dashboard.</div></div>
+      <div class="faq-item"><div class="faq-q">Are the classes live or recorded? <span class="plus">+</span></div><div class="faq-a">Both. Every course includes recorded HD lessons plus weekly live sessions for feedback and Q&amp;A.</div></div>
+      <div class="faq-item"><div class="faq-q">Will I receive a certificate? <span class="plus">+</span></div><div class="faq-a">Yes — complete the assignments and final assessment to earn your Glowora certificate.</div></div>
+      <div class="faq-item"><div class="faq-q">Can beginners join? <span class="plus">+</span></div><div class="faq-a">Absolutely. Our Beginner Makeup and Skincare Expert courses are built for students starting from zero.</div></div>
+      <div class="faq-item"><div class="faq-q">Do I get lifetime access? <span class="plus">+</span></div><div class="faq-a">Yes, every enrollment includes lifetime access to that course's lessons and updates.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="background:var(--beige);">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Contact</div>
+      <h2>Have a question before you enroll?</h2>
+    </div>
+    <div class="contact-wrap">
+      <form onsubmit="event.preventDefault(); this.querySelector('.confirm').style.display='block';">
+        <div class="form-field"><label>Name</label><input type="text" placeholder="Your full name" required></div>
+        <div class="form-field"><label>Email</label><input type="email" placeholder="you@email.com" required></div>
+        <div class="form-field"><label>Phone</label><input type="tel" placeholder="+91 00000 00000"></div>
+        <div class="form-field"><label>Message</label><textarea placeholder="Tell us what you'd like to learn..."></textarea></div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+        <p class="confirm" style="display:none; font-size:12.5px; color:var(--gold-deep); margin-top:14px;">Thanks — we'll get back to you within 24 hours.</p>
+      </form>
+      <div class="contact-info-card">
+        <div class="contact-row"><div class="ic">☺</div><div><b>Contact Person</b><span>Insa Saddique</span></div></div>
+        <div class="contact-row"><div class="ic">✆</div><div><b>WhatsApp / Phone</b><span>0302-5533425</span></div></div>
+        <div class="contact-row"><div class="ic">✉</div><div><b>Email</b><span>hello@gloworaacademy.com</span></div></div>
+        <div class="contact-row"><div class="ic">⚲</div><div><b>Studio Location</b><span>Connaught Place, New Delhi</span></div></div>
+        <div class="map-box">Map preview</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="cta-band">
+    <h2>Your beauty career starts with one class</h2>
+    <p>Join thousands of students already learning with Glowora Beauty Academy.</p>
+    <a href="#courses" class="btn btn-primary">Explore Courses</a>
+    <a href="#tutorials" class="btn btn-ghost">Watch Free Class</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><div class="logo-mark"></div><div class="logo-text" style="color:#fff;">Glowora</div></div>
+        <p>Learn beauty. Build confidence. Start your career. A premium online academy for makeup, skincare, and beauty business.</p>
+        <div class="socials"><a href="#">IG</a><a href="#">FB</a><a href="#">TT</a><a href="#">YT</a><a href="#">PN</a></div>
+      </div>
+      <div><h5>Explore</h5><ul><li><a href="#courses">Courses</a></li><li><a href="#tutorials">Tutorials</a></li><li><a href="#blog">Blog</a></li><li><a href="#stories">Success Stories</a></li></ul></div>
+      <div><h5>Company</h5><ul><li><a href="#instructor">About</a></li><li><a href="#contact">Contact</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms &amp; Conditions</a></li></ul></div>
+      <div><h5>Support</h5><ul><li><a href="#">Help Center</a></li><li><a href="#">Student Login</a></li><li><a href="#">Certificates</a></li></ul></div>
+      <div class="newsletter"><h5>Newsletter</h5><p style="font-size:13px;color:#cfc3b7;margin:0 0 14px;">Join our community and receive free beauty tips every week.</p><input type="email" placeholder="Your email address"><a href="#" class="btn btn-primary btn-sm" style="width:100%;justify-content:center;">Subscribe</a></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Glowora Beauty Academy. All Rights Reserved.</span>
+      <span>Made with care for aspiring beauty professionals.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Dark mode toggle
+  const toggle = document.getElementById('themeToggle');
+  toggle.addEventListener('click', () => {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    toggle.textContent = isDark ? '◐' : '◑';
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.course-card, .why-card, .test-card, .blog-card, .tut-card, .step');
+  revealEls.forEach(el => { el.style.opacity = 0; el.style.transform = 'translateY(24px)'; el.style.transition = 'opacity .6s ease, transform .6s ease'; });
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = 1;
+        entry.target.style.transform = 'translateY(0)';
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
